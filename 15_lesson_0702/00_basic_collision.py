@@ -23,10 +23,14 @@ YELLOW = (255, 235, 84)
 player = pg.Rect((x, y, block, block))  # создать объект в координатах x, y, размерами block
 enemy = pg.Rect((enemy_x, enemy_y, block, block))  # создаю объект-враг
 
+score = 0
+
+pg.font.init()  # подключение шрифта
+score_font = pg.font.SysFont('comicsans', 30)  # настройка шрифта
+
 finished = False  # флаг, который отвечает за работу программы
 while not finished:  # пока игра не окончена
-    clock.tick(30)  # частота обновления 30 кадров в секунду
-    # отслеживаю события (нажатия кнопок)
+    clock.tick(10)
     for event in pg.event.get():  # для каждого события в списке событий
         if event.type == pg.QUIT:  # если нажали на крестик
             finished = True
@@ -44,14 +48,21 @@ while not finished:  # пока игра не окончена
                 x_change = 0
                 y_change = block
 
+    player.x += x_change
+    player.y += y_change
+
     screen.fill((255, 255, 255))
     rect(screen, MINT, player)
     rect(screen, YELLOW, enemy)
+
+    text = score_font.render(f'Score: {score}', True, (0, 0, 0))  # написать на экране
+    screen.blit(text, [0, 0])  # отобразить написанное
     # рисуем тут
     pg.display.update()
 
     if player.colliderect(enemy):  # если player коснулся enemy
         enemy.x = randint(0, W - block)
         enemy.y = randint(0, H - block)
+        score += 1
 
 
