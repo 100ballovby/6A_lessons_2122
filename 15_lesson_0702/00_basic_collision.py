@@ -27,6 +27,7 @@ score = 0
 
 pg.font.init()  # подключение шрифта
 score_font = pg.font.SysFont('comicsans', 30)  # настройка шрифта
+game_over_font = pg.font.SysFont('arial', 30)  # настройки шрифта для проигрыша
 
 finished = False  # флаг, который отвечает за работу программы
 game_over = False  # если проиграем, game_over = True
@@ -34,6 +35,11 @@ while not finished:  # пока игра не окончена
     clock.tick(10)
 
     while game_over:  # когда проиграем, ставим игру на паузу
+        screen.fill((255, 255, 255))  # убираем все нарисованное
+        text = game_over_font.render('Вы проиграли! Нажмите C, чтобы продолжить, или ESC, чтобы закрыть игру', True, (0, 0, 0))
+        screen.blit(text, [0, H // 2])  # пишем текст на экране паузы
+        pg.display.update()
+
         for event in pg.event.get():
             if event.type == pg.KEYDOWN:  # если нажали на кнопку
                 if event.key == pg.K_c:  # если нажали на кнопку C
