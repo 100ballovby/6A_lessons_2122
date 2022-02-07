@@ -29,8 +29,24 @@ pg.font.init()  # подключение шрифта
 score_font = pg.font.SysFont('comicsans', 30)  # настройка шрифта
 
 finished = False  # флаг, который отвечает за работу программы
+game_over = False  # если проиграем, game_over = True
 while not finished:  # пока игра не окончена
     clock.tick(10)
+
+    while game_over:  # когда проиграем, ставим игру на паузу
+        for event in pg.event.get():
+            if event.type == pg.KEYDOWN:  # если нажали на кнопку
+                if event.key == pg.K_c:  # если нажали на кнопку C
+                    x = W // 2
+                    y = H // 2
+                    x_change = 0
+                    y_change = 0
+                    game_over = False
+                if event.key == pg.K_ESCAPE:
+                    game_over = False
+                    finished = True
+
+
     for event in pg.event.get():  # для каждого события в списке событий
         if event.type == pg.QUIT:  # если нажали на крестик
             finished = True
