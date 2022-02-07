@@ -2,7 +2,7 @@ import pygame as pg
 from pygame.draw import rect, circle, polygon
 from random import randint
 
-W = 640
+W = 1280
 H = 640
 # создаю объект окна программы
 screen = pg.display.set_mode((W, H))  # 640pх - ширина и 480px - высота
@@ -27,7 +27,7 @@ score = 0
 
 pg.font.init()  # подключение шрифта
 score_font = pg.font.SysFont('comicsans', 30)  # настройка шрифта
-game_over_font = pg.font.SysFont('arial', 30)  # настройки шрифта для проигрыша
+game_over_font = pg.font.SysFont('arial', 15)  # настройки шрифта для проигрыша
 
 finished = False  # флаг, который отвечает за работу программы
 game_over = False  # если проиграем, game_over = True
@@ -43,8 +43,8 @@ while not finished:  # пока игра не окончена
         for event in pg.event.get():
             if event.type == pg.KEYDOWN:  # если нажали на кнопку
                 if event.key == pg.K_c:  # если нажали на кнопку C
-                    x = W // 2
-                    y = H // 2
+                    player.x = W // 2
+                    player.y = H // 2
                     x_change = 0
                     y_change = 0
                     game_over = False
@@ -86,5 +86,8 @@ while not finished:  # пока игра не окончена
         enemy.x = randint(0, W - block)
         enemy.y = randint(0, H - block)
         score += 1
+
+    if (player.x < 0 or player.x > W) or (player.y < 0 or player.y > H):
+        game_over = True
 
 
