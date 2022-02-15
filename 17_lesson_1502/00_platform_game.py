@@ -30,11 +30,11 @@ while not finished:  # пока игра не окончена
     platform = rect(screen, BLACK, [player_x, player_y, 200, 50])
     enemy = circle(screen, RED, [circle_x, circle_y], radius)
 
+    # рисуем тут
+    pg.display.update()
+
     keys = pg.key.get_pressed()
     if keys[pg.K_RIGHT]:
         player_x += 15
     if keys[pg.K_LEFT]:
         player_x -= 15
-
-    # рисуем тут
-    pg.display.update()
