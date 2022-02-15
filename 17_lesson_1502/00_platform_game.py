@@ -45,3 +45,7 @@ while not finished:  # пока игра не окончена
     if circle_y > H:
         circle_y = 0 - radius
         circle_x = randint(0, W)
+
+    if platform.colliderect(enemy):
+        circle_y = 0 - radius
+        circle_x = randint(0, W)
