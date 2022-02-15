@@ -61,9 +61,9 @@ while not finished:  # пока игра не окончена
     # движение платформы
     keys = pg.key.get_pressed()
     if keys[pg.K_RIGHT]:
-        player_x += speed
+        player_x += speed + 4
     if keys[pg.K_LEFT]:
-        player_x -= speed
+        player_x -= speed + 4
 
     #  движение шарика
     circle_y += speed
@@ -81,3 +81,8 @@ while not finished:  # пока игра не окончена
     # условие проигрыша
     if score <= 0:
         game_over = True
+    print(speed)
+    # увеличение скорости
+    if score > 0 and score % 10 == 0:
+        score += 1
+        speed += 1
