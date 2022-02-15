@@ -11,6 +11,8 @@ WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 RED = (237, 107, 28)
 
+speed = 15
+
 player_x = W // 2
 player_y = H - 100
 
@@ -59,12 +61,12 @@ while not finished:  # пока игра не окончена
     # движение платформы
     keys = pg.key.get_pressed()
     if keys[pg.K_RIGHT]:
-        player_x += 15
+        player_x += speed
     if keys[pg.K_LEFT]:
-        player_x -= 15
+        player_x -= speed
 
     #  движение шарика
-    circle_y += 15
+    circle_y += speed
     if circle_y > H:
         circle_y = 0 - radius
         circle_x = randint(0, W)
