@@ -18,6 +18,10 @@ radius = 40
 circle_x = randint(0, W)
 circle_y = 0 - radius
 
+pg.font.init()
+font = pg.font.SysFont('comicsans', 32)
+score = 3
+
 finished = False  # флаг, который отвечает за работу программы
 while not finished:  # пока игра не окончена
     clock.tick(30)  # частота обновления 30 кадров в секунду
@@ -30,6 +34,8 @@ while not finished:  # пока игра не окончена
     platform = rect(screen, BLACK, [player_x, player_y, 200, 50])
     enemy = circle(screen, RED, [circle_x, circle_y], radius)
 
+    txt = font.render(f'Score: {score}', True, BLACK)
+    screen.blit(txt, [0, 0])
     # рисуем тут
     pg.display.update()
 
@@ -45,7 +51,9 @@ while not finished:  # пока игра не окончена
     if circle_y > H:
         circle_y = 0 - radius
         circle_x = randint(0, W)
+        score -= 1
 
     if platform.colliderect(enemy):
         circle_y = 0 - radius
         circle_x = randint(0, W)
+        score += 1
