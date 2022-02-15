@@ -33,8 +33,15 @@ while not finished:  # пока игра не окончена
     # рисуем тут
     pg.display.update()
 
+    # движение платформы
     keys = pg.key.get_pressed()
     if keys[pg.K_RIGHT]:
         player_x += 15
     if keys[pg.K_LEFT]:
         player_x -= 15
+
+    #  движение шарика
+    circle_y += 15
+    if circle_y > H:
+        circle_y = 0 - radius
+        circle_x = randint(0, W)
