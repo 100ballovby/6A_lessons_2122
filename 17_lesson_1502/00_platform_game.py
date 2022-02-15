@@ -22,8 +22,25 @@ pg.font.init()
 font = pg.font.SysFont('comicsans', 32)
 score = 3
 
-finished = False  # флаг, который отвечает за работу программы
+finished = False
+game_over = False
 while not finished:  # пока игра не окончена
+
+    while game_over:
+        screen.fill(WHITE)
+        txt = font.render('Press C to continue or ESC to exit', True, BLACK)
+        screen.blit(txt, [W // 2, H // 2])
+        pg.display.update()
+        for event in pg.event.get():  # для каждого события в списке событий
+            if event.type == pg.KEYDOWN:
+                if event.key == pg.K_c:
+                    game_over = False
+                    score = 3
+                if event.key == pg.K_ESCAPE:
+                    pg.quit()
+
+
+
     clock.tick(30)  # частота обновления 30 кадров в секунду
     # отслеживаю события (нажатия кнопок)
     for event in pg.event.get():  # для каждого события в списке событий
@@ -53,7 +70,12 @@ while not finished:  # пока игра не окончена
         circle_x = randint(0, W)
         score -= 1
 
+    # коллизия платформы
     if platform.colliderect(enemy):
         circle_y = 0 - radius
         circle_x = randint(0, W)
         score += 1
+
+    # условие проигрыша
+    if score <= 0:
+        game_over = True
