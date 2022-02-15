@@ -41,8 +41,6 @@ while not finished:  # пока игра не окончена
                 if event.key == pg.K_ESCAPE:
                     pg.quit()
 
-
-
     clock.tick(30)  # частота обновления 30 кадров в секунду
     # отслеживаю события (нажатия кнопок)
     for event in pg.event.get():  # для каждого события в списке событий
